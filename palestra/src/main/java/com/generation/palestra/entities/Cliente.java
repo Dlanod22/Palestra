@@ -6,10 +6,10 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 public class Cliente extends Persona{
-    
+
     private Corso corso;
     private Scheda scheda;
-    private PianoAbbonameto pianoAbbonamento;
+    private PianoAbbonamento pianoAbbonamento;
 
     int eta;
 
