@@ -1,5 +1,11 @@
 package com.generation.palestra.entities;
 
-public class Entity {
-    
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString(includeFieldNames = true)
+public class Entity implements IMappable
+{
+    private Long id;
 }
