@@ -82,7 +82,7 @@ public class IstruttoreDao implements IDAO<Istruttore>
     }
 
     @Override
-    public void update(Istruttore e, int idModificato) 
+    public void update(Istruttore e, int...idModificato) 
     {
         database.executeUpdate(updatePersona,
                                     e.getNome(),
@@ -99,6 +99,7 @@ public class IstruttoreDao implements IDAO<Istruttore>
     {
         database.executeUpdate(deletePersona, String.valueOf(id));
     }
+
     
 }
 

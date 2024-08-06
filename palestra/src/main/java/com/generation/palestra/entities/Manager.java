@@ -5,6 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = true)
-public class Manager extends Persona{
+public class Manager extends Persona
+{
     
 }

@@ -128,7 +128,7 @@ public class ClienteDao implements IDAO<Cliente>{
     }
 
     @Override
-    public void update(Cliente e) 
+    public void update(Cliente e, int...idModificato) 
     {
         database.executeUpdate(updatePersona,
                                     e.getNome(),

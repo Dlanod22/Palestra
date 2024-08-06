@@ -11,7 +11,8 @@ import com.generation.palestra.dao.database.Database;
 import com.generation.palestra.entities.Entity;
 import com.generation.palestra.entities.Scheda;
 
-public class SchedaDAO implements IDAO<Scheda> {
+public class SchedaDao implements IDAO<Scheda> 
+{
       @Autowired
     private Database database;
 
@@ -52,7 +53,7 @@ public class SchedaDAO implements IDAO<Scheda> {
     
 
     @Override
-    public void update(Scheda e) {
+    public void update(Scheda e, int...idModificato) {
         database.executeUpdate(updateScheda, e.getEse1(),e.getEse2(),e.getEse3(),e.getEse4(),e.getEse5(),e.getEse6(),e.getEse7(),e.getEse8(),e.getEse9(), String.valueOf(e.getId()));
     }
 

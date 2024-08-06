@@ -5,21 +5,22 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = true)
-public class Cliente extends Persona{
+public class Cliente extends Persona
+{
 
     private Corso corso;
     private Scheda scheda;
     private PianoAbbonamento pianoAbbonamento;
 
-    int eta;
+    private int eta;
 
-    double peso;
+    private double peso;
 
-    int altezza;
+    private int altezza;
 
-    char sesso;
+    private char sesso;
 
-    String obiettivo;
+    private String obiettivo;
 
     
 }

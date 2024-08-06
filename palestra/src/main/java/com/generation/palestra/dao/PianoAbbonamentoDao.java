@@ -11,7 +11,7 @@ import com.generation.palestra.entities.Entity;
 import com.generation.palestra.entities.PianoAbbonamento;
 import com.generation.palestra.entities.Scheda;
 
-public class PianoAbbonamentiDAO implements IDAO<PianoAbbonamento> {
+public class PianoAbbonamentiDao implements IDAO<PianoAbbonamento> {
        @Autowired
     private Database database;
 
@@ -55,7 +55,7 @@ public class PianoAbbonamentiDAO implements IDAO<PianoAbbonamento> {
     
 
     @Override
-    public void update(PianoAbbonamento e) 
+    public void update(PianoAbbonamento e, int...idModificato) 
     {
         database.executeUpdate(updateAbbonamento, e.getNome(), String.valueOf(e.getId()));
     }

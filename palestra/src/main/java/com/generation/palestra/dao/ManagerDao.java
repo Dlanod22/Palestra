@@ -13,7 +13,7 @@ import com.generation.palestra.entities.Entity;
 import com.generation.palestra.entities.Manager;
 
 @Service
-public class ManagerDao implements IDAO<ManagerDao>
+public class ManagerDao implements IDAO<Manager>
 {
 
     @Autowired
@@ -64,7 +64,7 @@ public class ManagerDao implements IDAO<ManagerDao>
     }
 
     @Override
-    public void update(Manager e , int idModificato) 
+    public void update(Manager e , int...idModificato) 
     {
         database.executeUpdate(updatePersona, 
                                     e.getNome(),
