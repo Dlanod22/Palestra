@@ -27,13 +27,15 @@ public class PianoAbbonamentiDAO implements IDAO<PianoAbbonamento> {
     private final String deleteAbbonamento = "delete from piani_abbonamento where id=?";
 
     @Override
-    public Long create(PianoAbbonamento e) {
+    public Long create(PianoAbbonamento e) 
+    {
         Long idScheda = database.executeUpdate(insertPianoAbbonamento, e.getNome());
         return idScheda;
     }
 
     @Override
-    public Map<Long, Entity> readAll() {
+    public Map<Long, Entity> readAll() 
+    {
         Map<Long, Entity> ris = new LinkedHashMap<>();
         Map<Long, Map<String, String>> result = database.executeQuery(ReadAllAbbonamenti);
 
@@ -44,7 +46,8 @@ public class PianoAbbonamentiDAO implements IDAO<PianoAbbonamento> {
         return ris;
     }
 
-    public PianoAbbonamento readById(Long id){
+    public PianoAbbonamento readById(Long id)
+    {
         Map<Long, Entity> allAbbonamenti = readAll();
         return (PianoAbbonamento)allAbbonamenti.get(id);
     }
@@ -52,12 +55,14 @@ public class PianoAbbonamentiDAO implements IDAO<PianoAbbonamento> {
     
 
     @Override
-    public void update(PianoAbbonamento e) {
+    public void update(PianoAbbonamento e) 
+    {
         database.executeUpdate(updateAbbonamento, e.getNome(), String.valueOf(e.getId()));
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) 
+    {
         database.executeUpdate(deleteAbbonamento, String.valueOf(id));
     }
 }

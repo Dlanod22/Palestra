@@ -30,7 +30,7 @@ public class ManagerDao implements IDAO<ManagerDao>
     
     private final String updatePersona = "update persone = set nome=?, cognome?, data_nascita=? where id=?";
     
-    private final String updateManager = "";
+    private final String updateManager =  "update managers set id=? where id=?";
     
     private final String deletePersona = "delete from persone where id=?";
 
@@ -64,7 +64,7 @@ public class ManagerDao implements IDAO<ManagerDao>
     }
 
     @Override
-    public void update(Manager e) 
+    public void update(Manager e , int idModificato) 
     {
         database.executeUpdate(updatePersona, 
                                     e.getNome(),
@@ -73,7 +73,7 @@ public class ManagerDao implements IDAO<ManagerDao>
                                     String.valueOf(e.getId())
         );
 
-        // database.executeUpdate(updateDirigente, null) //Se ci sono altre proprietà specifiche su dirigente aggiornaimo anche la sua tabella
+        database.executeUpdate(updateManager, String.valueOf(idModificato), String.valueOf(e.getId())); //Se ci sono altre proprietà specifiche su dirigente aggiornaimo anche la sua tabella
     }
 
     @Override
