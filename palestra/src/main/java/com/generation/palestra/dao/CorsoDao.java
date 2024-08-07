@@ -54,7 +54,7 @@ public class CorsoDao implements IDAO<Corso>{
     }
 
     @Override
-    public void update(Corso e) 
+    public void update(Corso e, int...idModificato) 
     {
         database.executeUpdate(updateCorso, e.getNome(), String.valueOf(e.getId()));
     }

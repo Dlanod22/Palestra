@@ -68,21 +68,22 @@ public class ClienteDao implements IDAO<Cliente>{
     }
 
     @Override
-    public Map<Long, Entity> readAll() 
-    {
-        Map<Long, Entity> ris = new LinkedHashMap<>();
-        Map<Long, Map<String, String>> result = database.executeQuery(readAllClienti);
+public Map<Long, Entity> readAll() {
+    Map<Long, Entity> ris = new LinkedHashMap<>();
+    Map<Long, Map<String, String>> result = database.executeQuery(readAllClienti);
 
-        for(Entry<Long, Map<String, String>> coppia : result.entrySet())
-        {
-            Cliente c = context.getBean(Cliente.class, coppia.getValue());
-            PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(coppia.getValue().get("idpiano")));
+    for (Entry<Long, Map<String, String>> coppia : result.entrySet()) {
+        Cliente c = context.getBean(Cliente.class, coppia.getValue());
+        String idPianoStr = coppia.getValue().get("idpiano");
+        if (idPianoStr != null) {
+            PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(idPianoStr));
             c.setPianoAbbonamento(p);
-            ris.put(c.getId(), c);
         }
-        
-        return ris;
+        ris.put(c.getId(), c);
     }
+
+    return ris;
+}
 
     public Map<Long, Entity> readByIdPiano(Long id_piano) 
     {
@@ -92,7 +93,7 @@ public class ClienteDao implements IDAO<Cliente>{
         for(Entry<Long, Map<String, String>> coppia : result.entrySet())
         {
             Cliente c = context.getBean(Cliente.class, coppia.getValue());
-            PianoAbbonamento p = pianoAbbonamentoDAO.readById(Long.parseLong(coppia.getValue().get("idpiano")));
+            PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(coppia.getValue().get("idpiano")));
             c.setPianoAbbonamento(p);
             ris.put(c.getId(), c);
         }
@@ -136,6 +137,12 @@ public class ClienteDao implements IDAO<Cliente>{
                                     String.valueOf(e.getDataNascita()),
                                     String.valueOf(e.getId())
         );
+
+        Long pianoAbbonamentoId = null;
+        if (e.getPianoAbbonamento() != null) 
+        {
+        pianoAbbonamentoId = e.getPianoAbbonamento().getId();
+        }
         
         database.executeUpdate(updateCliente, 
                                     String.valueOf(e.getEta()),
@@ -143,8 +150,9 @@ public class ClienteDao implements IDAO<Cliente>{
                                     String.valueOf(e.getAltezza()),
                                     String.valueOf(e.getSesso()),
                                     e.getObiettivo(),
-                                    String.valueOf(e.getPianoAbbonamento().getId()), 
-                                    String.valueOf(e.getId()));                       
+                                    pianoAbbonamentoId != null ? String.valueOf(pianoAbbonamentoId) : null,
+                                    String.valueOf(e.getId())
+                                );                  
     }
 
     @Override

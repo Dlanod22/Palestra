@@ -5,13 +5,17 @@ import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.generation.palestra.dao.database.Database;
 import com.generation.palestra.entities.Entity;
 import com.generation.palestra.entities.PianoAbbonamento;
 import com.generation.palestra.entities.Scheda;
 
-public class PianoAbbonamentiDao implements IDAO<PianoAbbonamento> {
+@Service
+public class PianoAbbonamentoDao implements IDAO<PianoAbbonamento> {
        @Autowired
     private Database database;
 
