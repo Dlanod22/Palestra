@@ -14,7 +14,8 @@ import com.generation.palestra.entities.Cliente;
 @ComponentScan(basePackages = "com.generation.palestra")
 public class PalestraApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+	{
         SpringApplication.run(PalestraApplication.class, args);
         
 		ClienteTest test = new ClienteTest();
