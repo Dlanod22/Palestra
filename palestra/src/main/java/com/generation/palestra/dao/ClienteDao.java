@@ -68,24 +68,27 @@ public class ClienteDao implements IDAO<Cliente>{
     }
 
     @Override
-public Map<Long, Entity> readAll() 
-{
-    Map<Long, Entity> ris = new LinkedHashMap<>();
-    Map<Long, Map<String, String>> result = database.executeQuery(readAllClienti);
-
-    for (Entry<Long, Map<String, String>> coppia : result.entrySet()) 
+    public Map<Long, Entity> readAll() 
     {
-        Cliente c = context.getBean(Cliente.class, coppia.getValue());
-        String idPianoStr = coppia.getValue().get("idpiano");
-        PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(idPianoStr));
-        c.setPianoAbbonamento(p);
-       
-        ris.put(c.getId(), c);
+        Map<Long, Entity> ris = new LinkedHashMap<>();
+        Map<Long, Map<String, String>> result = database.executeQuery(readAllClienti);
+    
+        for (Entry<Long, Map<String, String>> coppia : result.entrySet()) 
+        {
+            Cliente c = context.getBean(Cliente.class, coppia.getValue());
+            String idPianoStr = coppia.getValue().get("idpiano");
+
+            if(idPianoStr == null)
+            {
+                PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(idPianoStr));
+                c.setPianoAbbonamento(p);
+            }
+    
+            ris.put(c.getId(), c);
+        }
+    
+        return ris;
     }
-
-    return ris;
-}
-
     public Map<Long, Entity> readByIdPiano(Long id_piano) 
     {
         Map<Long, Entity> ris = new LinkedHashMap<>();
