@@ -8,10 +8,6 @@ import lombok.ToString;
 public class Cliente extends Persona
 {
 
-    private Corso corso;
-    private Scheda scheda;
-    private PianoAbbonamento pianoAbbonamento;
-
     private int eta;
 
     private double peso;
@@ -21,6 +17,9 @@ public class Cliente extends Persona
     private char sesso;
 
     private String obiettivo;
+
+    private PianoAbbonamento pianoAbbonamento;
+    private Scheda scheda;
 
     
 }

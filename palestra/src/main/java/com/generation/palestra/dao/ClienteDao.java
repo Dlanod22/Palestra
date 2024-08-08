@@ -32,7 +32,7 @@ public class ClienteDao implements IDAO<Cliente>{
     
     private final String insertCliente = "insert into clienti(id, eta, peso, altezza, sesso, obiettivo, id_piano) values(?, ?, ?, ?, ?, ?, ?)";
 
-    private final String readAllClienti = "select p.*, c.id_piano from clienti c join persone p on c.id = p.id";
+    private final String readAllClienti = "select p.*, c.* from clienti c join persone p on c.id = p.id";
 
     private final String readClientiByIdPianoAbbonamento = "select p.*, c.id_piano from clienti c join persone p on c.id = p.id where c.id_piano = ?";
     
@@ -68,17 +68,18 @@ public class ClienteDao implements IDAO<Cliente>{
     }
 
     @Override
-public Map<Long, Entity> readAll() {
+public Map<Long, Entity> readAll() 
+{
     Map<Long, Entity> ris = new LinkedHashMap<>();
     Map<Long, Map<String, String>> result = database.executeQuery(readAllClienti);
 
-    for (Entry<Long, Map<String, String>> coppia : result.entrySet()) {
+    for (Entry<Long, Map<String, String>> coppia : result.entrySet()) 
+    {
         Cliente c = context.getBean(Cliente.class, coppia.getValue());
         String idPianoStr = coppia.getValue().get("idpiano");
-        if (idPianoStr != null) {
-            PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(idPianoStr));
-            c.setPianoAbbonamento(p);
-        }
+        PianoAbbonamento p = pianoAbbonamentoDao.readById(Long.parseLong(idPianoStr));
+        c.setPianoAbbonamento(p);
+       
         ris.put(c.getId(), c);
     }
 
